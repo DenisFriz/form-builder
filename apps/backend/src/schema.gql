@@ -1,0 +1,90 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Question {
+  """The ID of the question"""
+  id: ID!
+
+  """The text of the question"""
+  text: String!
+
+  """The type of the question"""
+  type: QuestionType!
+
+  """The available options for the question"""
+  options: [String!]
+}
+
+enum QuestionType {
+  TEXT
+  MULTIPLE_CHOICE
+  CHECKBOX
+  DATE
+}
+
+type Form {
+  """The ID of the form"""
+  id: ID!
+
+  """The title of the form"""
+  title: String!
+
+  """The description of the form"""
+  description: String!
+
+  """The questions in the form"""
+  questions: [Question!]!
+}
+
+type Answer {
+  """The ID of the answer"""
+  questionId: ID!
+
+  """The actual answer"""
+  value: String!
+}
+
+type Response {
+  """The ID of the response"""
+  id: ID!
+
+  """The ID of the form"""
+  formId: ID!
+
+  """The list of answers"""
+  answers: [Answer!]!
+}
+
+type Query {
+  forms: [Form!]!
+  form(id: String!): Form
+  responses(formId: String!): [Response!]!
+}
+
+type Mutation {
+  createForm(data: CreateFormInput!): Form!
+  submitResponse(data: SubmitResponseInput!): Response!
+}
+
+input CreateFormInput {
+  title: String!
+  description: String!
+  questions: [QuestionInput!]
+}
+
+input QuestionInput {
+  text: String!
+  type: QuestionType!
+  options: [String!]
+}
+
+input SubmitResponseInput {
+  formId: ID!
+  answers: [AnswerInput!]!
+}
+
+input AnswerInput {
+  questionId: ID!
+  value: String!
+}

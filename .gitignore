@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnp.*
+.cache
+
+dist/
+apps/*/node_modules/
+packages/*/node_modules/
